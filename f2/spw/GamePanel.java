@@ -15,6 +15,11 @@ public class GamePanel extends JPanel {
 	ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 
 	public GamePanel() {
+	/*try{
+			bi = ImageIO.read(new File("C:/Users/aom_a_000/Desktop/New folder/images.jpg"));
+		}catch (IOException e){
+				e.printStackTrace();
+		}*/
 		bi = new BufferedImage(400, 600, BufferedImage.TYPE_INT_ARGB);
 		big = (Graphics2D) bi.getGraphics();
 		big.setBackground(Color.YELLOW);
@@ -37,5 +42,8 @@ public class GamePanel extends JPanel {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawImage(bi, null, 0, 0);
 	}
-
+	/*public void paint(Graphics g) {
+		Graphics2D g2d = (Graphics2D) g;
+		g.drawImage(bi, 0, 0, null);
+	}*/
 }
