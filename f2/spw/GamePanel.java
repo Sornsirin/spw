@@ -1,4 +1,4 @@
-package f2.spw;
+//package f2.spw;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -22,7 +22,7 @@ public class GamePanel extends JPanel {
 		}*/
 		bi = new BufferedImage(400, 600, BufferedImage.TYPE_INT_ARGB);
 		big = (Graphics2D) bi.getGraphics();
-		big.setBackground(Color.YELLOW);
+		big.setBackground(Color.BLACK);
 	}
 
 	public void updateGameUI(GameReporter reporter){

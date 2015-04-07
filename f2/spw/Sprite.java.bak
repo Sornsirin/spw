@@ -19,6 +19,8 @@ public abstract class Sprite {
 
 	abstract public void draw(Graphics2D g);
 	
+	abstract public void draw2(Graphics2D h);
+
 	public Double getRectangle() {
 		return new Rectangle2D.Double(x, y, width, height);
 	}
