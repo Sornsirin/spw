@@ -1,4 +1,4 @@
-package f2.spw;
+//package f2.spw;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +19,8 @@ public class GameEngine implements KeyListener, GameReporter{
 	
 	private Timer timer;
 	
+	//private int hp = 3;
+
 	private long score = 0;
 	private double difficulty = 0.1;
 	
@@ -48,7 +50,7 @@ public class GameEngine implements KeyListener, GameReporter{
 		gp.sprites.add(e);
 		enemies.add(e);
 	}
-	
+		
 	private void process(){
 		if(Math.random() < difficulty){
 			generateEnemy();
@@ -73,11 +75,21 @@ public class GameEngine implements KeyListener, GameReporter{
 		for(Enemy e : enemies){
 			er = e.getRectangle();
 			if(er.intersects(vr)){
+				//hhp();
 				die();
 				return;
 			}
 		}
 	}
+	/*public void hhp(){
+		//SpaceShip v ;
+			//v.proceed();
+		if(hp !=0){
+			hp--;
+			isAlive();}
+		else
+			die();
+	}*/
 	
 	public void die(){
 		timer.stop();

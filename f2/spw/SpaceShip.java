@@ -9,10 +9,10 @@ import java.awt.Image;
 
 public class SpaceShip extends Sprite{
 
-	int step = 8;
+	int step = 7;
 	
 	public SpaceShip(int x, int y, int width, int height) {
-		super(x, y, 30,40);
+		super(x, y, 40,40);
 	}
 
 	@Override

@@ -8,27 +8,29 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import java.awt.Toolkit;
+import java.awt.Image;
+
 public class GamePanel extends JPanel {
 	
 	private BufferedImage bi;	
 	Graphics2D big;
+		private Image imgBackground;
+        
 	ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 
 	public GamePanel() {
-	/*try{
-			bi = ImageIO.read(new File("C:/Users/aom_a_000/Desktop/New folder/images.jpg"));
-		}catch (IOException e){
-				e.printStackTrace();
-		}*/
+		imgBackground = Toolkit.getDefaultToolkit().getImage("bg.jpg");
 		bi = new BufferedImage(400, 600, BufferedImage.TYPE_INT_ARGB);
 		big = (Graphics2D) bi.getGraphics();
-		big.setBackground(Color.BLACK);
+		//big.setBackground(Color.BLACK);
+		big.drawImage(imgBackground, 0, 0, 400, 600,null);
 	}
 
 	public void updateGameUI(GameReporter reporter){
-		big.clearRect(0, 0, 400, 600);
-		
-		big.setColor(Color.WHITE);		
+		//big.clearRect(0, 0, 400, 600);
+		big.drawImage(imgBackground, 0, 0, 400, 600,null);
+		big.setColor(Color.BLACK);		
 		big.drawString(String.format("%08d", reporter.getScore()), 300, 20);
 		for(Sprite s : sprites){
 			s.draw(big);
