@@ -12,7 +12,7 @@ public class Enemy extends Sprite{
 	public static final int Y_TO_FADE = 400;
 	public static final int Y_TO_DIE = 600;
 	
-	private int step = 10;
+	private int step = 7;
 	private boolean alive = true;
 	
 	public Enemy(int x, int y) {
@@ -29,7 +29,7 @@ public class Enemy extends Sprite{
 					(float)(Y_TO_DIE - y)/(Y_TO_DIE - Y_TO_FADE)));
 		}
 		
-		    Image img = Toolkit.getDefaultToolkit().getImage("love.gif");
+		    Image img = Toolkit.getDefaultToolkit().getImage("star.gif");
             g.drawImage(img, x, y, width, height, null);	
 		
 	}

@@ -20,7 +20,7 @@ public class GamePanel extends JPanel {
 	ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 
 	public GamePanel() {
-		imgBackground = Toolkit.getDefaultToolkit().getImage("bg.jpg");
+		imgBackground = Toolkit.getDefaultToolkit().getImage("bg.gif");
 		bi = new BufferedImage(400, 600, BufferedImage.TYPE_INT_ARGB);
 		big = (Graphics2D) bi.getGraphics();
 		//big.setBackground(Color.BLACK);
@@ -30,8 +30,12 @@ public class GamePanel extends JPanel {
 	public void updateGameUI(GameReporter reporter){
 		//big.clearRect(0, 0, 400, 600);
 		big.drawImage(imgBackground, 0, 0, 400, 600,null);
-		big.setColor(Color.BLACK);		
-		big.drawString(String.format("%08d", reporter.getScore()), 300, 20);
+		big.setColor(Color.WHITE);		
+		big.drawString(String.format("Score:%08d", reporter.getScore()), 300, 20);
+		big.setColor(Color.WHITE);
+		big.drawString(String.format("Item:%08d", reporter.getScoreItem()), 150, 20);
+		big.setColor(Color.WHITE);
+		big.drawString(String.format("MAX:%08d", reporter.getScoreTotal()), 10, 20);
 		for(Sprite s : sprites){
 			s.draw(big);
 		}

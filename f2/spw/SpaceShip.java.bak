@@ -9,7 +9,7 @@ import java.awt.Image;
 
 public class SpaceShip extends Sprite{
 
-	int step = 8;
+	int step = 7;
 	
 	public SpaceShip(int x, int y, int width, int height) {
 		super(x, y, 40,40);
@@ -17,7 +17,7 @@ public class SpaceShip extends Sprite{
 
 	@Override
 	public void draw(Graphics2D g) {
-		Image img = Toolkit.getDefaultToolkit().getImage("pooh.gif");
+		Image img = Toolkit.getDefaultToolkit().getImage("girl.gif");
         g.drawImage(img, x, y, width, height, null);
 		
 	}

@@ -10,17 +10,19 @@ import java.util.Iterator;
 
 import javax.swing.Timer;
 
+import javax.swing.JOptionPane;
+
 
 public class GameEngine implements KeyListener, GameReporter{
 	GamePanel gp;
 		
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();	
+	private ArrayList<Item> item = new ArrayList<Item>();
 	private SpaceShip v;	
 	
 	private Timer timer;
-	
-	private int hp = 3;
-
+	private long scoreTotal = 0;
+	private long scoreItem = 0;
 	private long score = 0;
 	private double difficulty = 0.1;
 	
@@ -35,6 +37,7 @@ public class GameEngine implements KeyListener, GameReporter{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				process();
+				processItem();
 			}
 		});
 		timer.setRepeats(true);
@@ -50,12 +53,18 @@ public class GameEngine implements KeyListener, GameReporter{
 		gp.sprites.add(e);
 		enemies.add(e);
 	}
-		
+
+	private void generateItem(){
+		Item it = new Item((int)(Math.random()*390), 30);
+		gp.sprites.add(it);
+		item.add(it);
+	}	
+
 	private void process(){
 		if(Math.random() < difficulty){
 			generateEnemy();
 		}
-		
+	
 		Iterator<Enemy> e_iter = enemies.iterator();
 		while(e_iter.hasNext()){
 			Enemy e = e_iter.next();
@@ -67,7 +76,9 @@ public class GameEngine implements KeyListener, GameReporter{
 				score += 200;
 			}
 		}
-		
+
+	
+
 		gp.updateGameUI(this);
 		
 		Rectangle2D.Double vr = v.getRectangle();
@@ -75,22 +86,38 @@ public class GameEngine implements KeyListener, GameReporter{
 		for(Enemy e : enemies){
 			er = e.getRectangle();
 			if(er.intersects(vr)){
-				//hhp();
 				die();
 				return;
 			}
 		}
 	}
-	/*public void hhp(){
-		//SpaceShip v ;
-			//v.proceed();
-		if(hp !=0){
-			hp--;
-			isAlive();}
-		else
-			die();
-	}*/
-	
+	private void processItem(){
+		if(Math.random() < difficulty/10){
+			generateItem();
+		}
+		
+		Iterator<Item> it_iter = item.iterator();
+		while(it_iter.hasNext()){
+			Item it = it_iter.next();
+			it.proceed();
+			
+			if(!it.isAlive()){
+				it_iter.remove();			
+			}
+		}
+		gp.updateGameUI(this);
+		
+		Rectangle2D.Double vr = v.getRectangle();
+		Rectangle2D.Double tr;
+		for(Item it : item){
+			tr = it.getRectangle();
+			if(tr.intersects(vr)){	
+				gp.sprites.remove(it);
+				scoreItem += 500;
+			}
+		}
+	}
+		
 	public void die(){
 		timer.stop();
 	}
@@ -118,7 +145,28 @@ public class GameEngine implements KeyListener, GameReporter{
 	public long getScore(){
 		return score;
 	}
-	
+
+	public void setScore(long score){
+		this.score = score;
+	}
+
+	public long getScoreItem(){
+		return scoreItem;
+	}
+
+	public void setScoreItem(long scoreItem){
+		this.scoreItem = scoreItem;
+	}
+
+	public long getScoreTotal(){
+		scoreTotal = scoreItem + score;
+		return scoreTotal;
+	}
+
+	public void setScoreTotal(long scoreTotal){
+		this.scoreTotal = scoreTotal;
+	}
+
 	@Override
 	public void keyPressed(KeyEvent e) {
 		controlVehicle(e);
