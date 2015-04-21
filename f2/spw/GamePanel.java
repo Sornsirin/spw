@@ -31,9 +31,11 @@ public class GamePanel extends JPanel {
 		//big.clearRect(0, 0, 400, 600);
 		big.drawImage(imgBackground, 0, 0, 400, 600,null);
 		big.setColor(Color.WHITE);		
-		big.drawString(String.format("Score:%08d", reporter.getScore()), 300, 20);
+		big.drawString(String.format("Score:%08d", reporter.getScore()), 290, 20);
 		big.setColor(Color.WHITE);
-		big.drawString(String.format("Item:%08d", reporter.getScoreItem()), 150, 20);
+		big.drawString(String.format("Item:%05d", reporter.getScoreItem()), 130, 20);
+		big.setColor(Color.WHITE);
+		big.drawString(String.format("Alive:%02d", reporter.getSpaceShipHp()), 230, 20);
 		big.setColor(Color.WHITE);
 		big.drawString(String.format("MAX:%08d", reporter.getScoreTotal()), 10, 20);
 		for(Sprite s : sprites){

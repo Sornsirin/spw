@@ -9,7 +9,9 @@ import java.awt.Image;
 
 public class SpaceShip extends Sprite{
 
+	int hp = 3;
 	int step = 7;
+	boolean alive = true;
 	
 	public SpaceShip(int x, int y, int width, int height) {
 		super(x, y, 40,40);
@@ -37,6 +39,19 @@ public class SpaceShip extends Sprite{
 			if(y > 600 - height)
 				y = 600	- height;
 		}	
+	}
+
+	public void hit() {
+		hp--;
+		if(hp <= 0) alive = false;
+	}
+
+	public int getHp() {
+		return hp;
+	}
+
+	public boolean isAlive() {
+		return alive;
 	}
 
 }

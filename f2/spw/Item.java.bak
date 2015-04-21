@@ -27,7 +27,7 @@ public class Item extends Sprite{
 					(float)(Y_TO_DIE - y)/(Y_TO_DIE - Y_TO_FADE)));
 		}
 		
-		    Image img = Toolkit.getDefaultToolkit().getImage("cat.gif");
+		    Image img = Toolkit.getDefaultToolkit().getImage("love.gif");
             g.drawImage(img, x, y, width, height, null);	
 		
 	}
@@ -37,6 +37,10 @@ public class Item extends Sprite{
 		if(y > Y_TO_DIE){
 			alive = false;
 		}
+	}
+
+	public void setAlive(boolean alive) {
+		this.alive = alive;
 	}
 	
 	public boolean isAlive(){

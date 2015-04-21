@@ -29,7 +29,7 @@ public class Enemy extends Sprite{
 					(float)(Y_TO_DIE - y)/(Y_TO_DIE - Y_TO_FADE)));
 		}
 		
-		    Image img = Toolkit.getDefaultToolkit().getImage("cat.gif");
+		    Image img = Toolkit.getDefaultToolkit().getImage("star.gif");
             g.drawImage(img, x, y, width, height, null);	
 		
 	}
@@ -39,6 +39,10 @@ public class Enemy extends Sprite{
 		if(y > Y_TO_DIE){
 			alive = false;
 		}
+	}
+
+	public void hit() {
+		alive = false;
 	}
 	
 	public boolean isAlive(){

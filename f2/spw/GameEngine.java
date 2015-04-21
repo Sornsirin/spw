@@ -16,14 +16,19 @@ import javax.swing.JOptionPane;
 public class GameEngine implements KeyListener, GameReporter{
 	GamePanel gp;
 		
-	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();	
+	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+	
 	private ArrayList<Item> item = new ArrayList<Item>();
+
 	private SpaceShip v;	
+
 	
 	private Timer timer;
 	private long scoreTotal = 0;
 	private long scoreItem = 0;
 	private long score = 0;
+	private long heart = 3;
+
 	private double difficulty = 0.1;
 	
 	public GameEngine(GamePanel gp, SpaceShip v) {
@@ -38,6 +43,7 @@ public class GameEngine implements KeyListener, GameReporter{
 			public void actionPerformed(ActionEvent arg0) {
 				process();
 				processItem();
+				checkSpaceShip();
 			}
 		});
 		timer.setRepeats(true);
@@ -86,7 +92,8 @@ public class GameEngine implements KeyListener, GameReporter{
 		for(Enemy e : enemies){
 			er = e.getRectangle();
 			if(er.intersects(vr)){
-				die();
+				v.hit();
+				e.hit();
 				return;
 			}
 		}
@@ -102,22 +109,34 @@ public class GameEngine implements KeyListener, GameReporter{
 			it.proceed();
 			
 			if(!it.isAlive()){
+				gp.sprites.remove(it);
 				it_iter.remove();			
 			}
 		}
-		//gp.updateGameUI(this);
+		gp.updateGameUI(this);
 		
 		Rectangle2D.Double vr = v.getRectangle();
 		Rectangle2D.Double tr;
 		for(Item it : item){
 			tr = it.getRectangle();
 			if(tr.intersects(vr)){	
-				gp.sprites.remove(it);
 				scoreItem += 500;
+				it.pickUp();
 			}
 		}
 	}
+
+	public void checkSpaceShip() {
+		if(!v.isAlive()) die();
+	}
+	
+	/*private void heartAlive(){
+		heart -= 1;
 		
+		if(heart <= 0)
+			die();
+			return;
+    }*/
 	public void die(){
 		timer.stop();
 	}
@@ -165,6 +184,10 @@ public class GameEngine implements KeyListener, GameReporter{
 
 	public void setScoreTotal(long scoreTotal){
 		this.scoreTotal = scoreTotal;
+	}
+
+	public int getSpaceShipHp() {
+		return v.getHp();
 	}
 
 	@Override
