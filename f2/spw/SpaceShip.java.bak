@@ -14,12 +14,12 @@ public class SpaceShip extends Sprite{
 	boolean alive = true;
 	
 	public SpaceShip(int x, int y, int width, int height) {
-		super(x, y, 40,40);
+		super(x, y, 60,50);
 	}
 
 	@Override
 	public void draw(Graphics2D g) {
-		Image img = Toolkit.getDefaultToolkit().getImage("pooh.gif");
+		Image img = Toolkit.getDefaultToolkit().getImage("girl.gif");
         g.drawImage(img, x, y, width, height, null);
 		
 	}
@@ -44,6 +44,10 @@ public class SpaceShip extends Sprite{
 	public void hit() {
 		hp--;
 		if(hp <= 0) alive = false;
+	}
+
+	public int getHp() {
+		return hp;
 	}
 
 	public boolean isAlive() {

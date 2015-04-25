@@ -14,7 +14,7 @@ public class SpaceShip extends Sprite{
 	boolean alive = true;
 	
 	public SpaceShip(int x, int y, int width, int height) {
-		super(x, y, 40,40);
+		super(x, y, 60,50);
 	}
 
 	@Override

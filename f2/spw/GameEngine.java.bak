@@ -17,7 +17,8 @@ public class GameEngine implements KeyListener, GameReporter{
 	GamePanel gp;
 		
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-	
+	private ArrayList<Enemy2> enemies2 = new ArrayList<Enemy2>();
+
 	private ArrayList<Item> item = new ArrayList<Item>();
 
 	private SpaceShip v;	
@@ -42,6 +43,7 @@ public class GameEngine implements KeyListener, GameReporter{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				process();
+				process2();
 				processItem();
 				checkSpaceShip();
 			}
@@ -58,6 +60,12 @@ public class GameEngine implements KeyListener, GameReporter{
 		Enemy e = new Enemy((int)(Math.random()*390), 30);
 		gp.sprites.add(e);
 		enemies.add(e);
+	}
+
+	private void generateEnemy2(){
+		Enemy2 f = new Enemy2((int)(Math.random()*390), 30);
+		gp.sprites.add(f);
+		enemies2.add(f);
 	}
 
 	private void generateItem(){
@@ -83,8 +91,6 @@ public class GameEngine implements KeyListener, GameReporter{
 			}
 		}
 
-	
-
 		gp.updateGameUI(this);
 		
 		Rectangle2D.Double vr = v.getRectangle();
@@ -98,6 +104,37 @@ public class GameEngine implements KeyListener, GameReporter{
 			}
 		}
 	}
+
+	private void process2(){
+		if(Math.random() < difficulty/30){
+			generateEnemy2();
+		}
+	
+		Iterator<Enemy2> f_iter = enemies2.iterator();
+		while(f_iter.hasNext()){
+			Enemy2 f = f_iter.next();
+			f.proceed();
+			
+			if(!f.isAlive()){
+				f_iter.remove();
+				gp.sprites.remove(f);
+				score += 300;
+			}
+		}
+		gp.updateGameUI(this);
+		
+		Rectangle2D.Double vr = v.getRectangle();
+		Rectangle2D.Double fr;
+		for(Enemy2 f : enemies2){
+			fr = f.getRectangle();
+			if(fr.intersects(vr)){
+				v.hit();
+				f.hit();
+				return;
+			}
+		}
+	}
+
 	private void processItem(){
 		if(Math.random() < difficulty/10){
 			generateItem();
@@ -127,12 +164,10 @@ public class GameEngine implements KeyListener, GameReporter{
 	}
 
 	public void checkSpaceShip() {
-		if(!v.isAlive()) die();
+		if(!v.isAlive()) 
+			die();
 	}
-	//private void scItem(){
-		//scoreItem += 100;
-   // }
-
+	
 	/*private void heartAlive(){
 		heart -= 1;
 		

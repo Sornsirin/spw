@@ -6,15 +6,15 @@ import java.awt.Toolkit;
 import java.awt.Image;
 
 
-public class Item extends Sprite{
+public class Enemy2 extends Sprite{
 	public static final int Y_TO_FADE = 400;
 	public static final int Y_TO_DIE = 600;
 	
-	private int step = 5;
+	private int step = 11;
 	private boolean alive = true;
 	
-	public Item(int x, int y) {
-		super(x, y, 30, 30);
+	public Enemy2(int x, int y) {
+		super(x, y, 100, 100);
 		
 	}
 
@@ -27,7 +27,7 @@ public class Item extends Sprite{
 					(float)(Y_TO_DIE - y)/(Y_TO_DIE - Y_TO_FADE)));
 		}
 		
-		    Image img = Toolkit.getDefaultToolkit().getImage("12u.gif");
+		    Image img = Toolkit.getDefaultToolkit().getImage("cat1.gif");
             g.drawImage(img, x, y, width, height, null);	
 		
 	}
@@ -39,7 +39,7 @@ public class Item extends Sprite{
 		}
 	}
 
-	public void pickUp() {
+	public void hit() {
 		alive = false;
 	}
 	

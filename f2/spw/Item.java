@@ -14,7 +14,7 @@ public class Item extends Sprite{
 	private boolean alive = true;
 	
 	public Item(int x, int y) {
-		super(x, y, 10, 14);
+		super(x, y, 30, 30);
 		
 	}
 
@@ -27,7 +27,7 @@ public class Item extends Sprite{
 					(float)(Y_TO_DIE - y)/(Y_TO_DIE - Y_TO_FADE)));
 		}
 		
-		    Image img = Toolkit.getDefaultToolkit().getImage("love.gif");
+		    Image img = Toolkit.getDefaultToolkit().getImage("cupcake.gif");
             g.drawImage(img, x, y, width, height, null);	
 		
 	}
