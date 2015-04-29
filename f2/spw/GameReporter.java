@@ -5,6 +5,6 @@ public interface GameReporter {
 	long getScore();
 	long getScoreItem();
 	long getScoreTotal();
-	int getSpaceShipHp();
-
+	int getSpaceShip();
+	int getHP();
 }

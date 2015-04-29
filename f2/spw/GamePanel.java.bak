@@ -15,29 +15,34 @@ public class GamePanel extends JPanel {
 	
 	private BufferedImage bi;	
 	Graphics2D big;
-		private Image imgBackground;
-        
+		private Image Background;
+        private Image Alives;
 	ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 
 	public GamePanel() {
-		imgBackground = Toolkit.getDefaultToolkit().getImage("4.jpg");
+		Background = Toolkit.getDefaultToolkit().getImage("bg2.jpg");
+		Alives = Toolkit.getDefaultToolkit().getImage("love.gif");
 		bi = new BufferedImage(400, 600, BufferedImage.TYPE_INT_ARGB);
 		big = (Graphics2D) bi.getGraphics();
 		//big.setBackground(Color.BLACK);
-		big.drawImage(imgBackground, 0, 0, 400, 600,null);
+		big.drawImage(Background, 0, 0, 400, 600,null);
+		big.drawImage(Alives, 5, 5, 20, 20, null);
 	}
 
 	public void updateGameUI(GameReporter reporter){
 		//big.clearRect(0, 0, 400, 600);
-		big.drawImage(imgBackground, 0, 0, 400, 600,null);
-		big.setColor(Color.WHITE);		
+		big.drawImage(Background, 0, 0, 400, 600,null);
+		big.drawImage(Alives, 35, 5, 25, 25, null);
+		big.setColor(Color.BLACK);		
 		big.drawString(String.format("Score:%08d", reporter.getScore()), 290, 20);
-		big.setColor(Color.WHITE);
-		big.drawString(String.format("Item:%05d", reporter.getScoreItem()), 130, 20);
-		big.setColor(Color.WHITE);
-		big.drawString(String.format("Alive:%02d", reporter.getSpaceShipHp()), 230, 20);
-		big.setColor(Color.WHITE);
-		big.drawString(String.format("MAX:%08d", reporter.getScoreTotal()), 10, 20);
+		big.setColor(Color.BLACK);
+		big.drawString(String.format("Item:%08d", reporter.getScoreItem()), 115, 20);
+		big.setColor(Color.RED);
+		big.drawString(String.format("HP:%02d", reporter.getHP()), 60, 20);
+		big.setColor(Color.BLACK);
+		big.drawString(String.format("Alive:   %2d", reporter.getSpaceShip()), 3, 20);
+		big.setColor(Color.BLACK);
+		big.drawString(String.format("MAX:%08d", reporter.getScoreTotal()), 200, 20);
 		for(Sprite s : sprites){
 			s.draw(big);
 		}

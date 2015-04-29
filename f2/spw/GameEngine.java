@@ -17,9 +17,13 @@ public class GameEngine implements KeyListener, GameReporter{
 	GamePanel gp;
 		
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+
 	private ArrayList<Enemy2> enemies2 = new ArrayList<Enemy2>();
 
 	private ArrayList<Item> item = new ArrayList<Item>();
+
+	private ArrayList<Icream> icreams = new ArrayList<Icream>();
+
 
 	private SpaceShip v;	
 
@@ -29,6 +33,8 @@ public class GameEngine implements KeyListener, GameReporter{
 	private long scoreItem = 0;
 	private long score = 0;
 	private long heart = 3;
+	//private long hp = 100;
+
 
 	private double difficulty = 0.1;
 	
@@ -45,6 +51,7 @@ public class GameEngine implements KeyListener, GameReporter{
 				process();
 				process2();
 				processItem();
+				processIcream();
 				checkSpaceShip();
 			}
 		});
@@ -74,8 +81,14 @@ public class GameEngine implements KeyListener, GameReporter{
 		item.add(it);
 	}	
 
+	private void generateIcream(){
+		Icream ic = new Icream((int)(Math.random()*390), 30);
+		gp.sprites.add(ic);
+		icreams.add(ic);
+	}	
+
 	private void process(){
-		if(Math.random() < difficulty){
+		if(Math.random() < difficulty/3){
 			generateEnemy();
 		}
 	
@@ -87,7 +100,7 @@ public class GameEngine implements KeyListener, GameReporter{
 			if(!e.isAlive()){
 				e_iter.remove();
 				gp.sprites.remove(e);
-				score += 200;
+				//score += 200;
 			}
 		}
 
@@ -98,7 +111,7 @@ public class GameEngine implements KeyListener, GameReporter{
 		for(Enemy e : enemies){
 			er = e.getRectangle();
 			if(er.intersects(vr)){
-				v.hit();
+				v.hp();
 				e.hit();
 				return;
 			}
@@ -106,7 +119,7 @@ public class GameEngine implements KeyListener, GameReporter{
 	}
 
 	private void process2(){
-		if(Math.random() < difficulty/30){
+		if(Math.random() < difficulty/5){
 			generateEnemy2();
 		}
 	
@@ -118,7 +131,7 @@ public class GameEngine implements KeyListener, GameReporter{
 			if(!f.isAlive()){
 				f_iter.remove();
 				gp.sprites.remove(f);
-				score += 300;
+				//score += 300;
 			}
 		}
 		gp.updateGameUI(this);
@@ -128,7 +141,7 @@ public class GameEngine implements KeyListener, GameReporter{
 		for(Enemy2 f : enemies2){
 			fr = f.getRectangle();
 			if(fr.intersects(vr)){
-				v.hit();
+				v.hp();
 				f.hit();
 				return;
 			}
@@ -136,7 +149,7 @@ public class GameEngine implements KeyListener, GameReporter{
 	}
 
 	private void processItem(){
-		if(Math.random() < difficulty/15){
+		if(Math.random() < difficulty/2){
 			generateItem();
 		}
 		
@@ -163,18 +176,40 @@ public class GameEngine implements KeyListener, GameReporter{
 		}
 	}
 
+	private void processIcream(){
+		if(Math.random() < difficulty/2){
+			generateIcream();
+		}
+		
+		Iterator<Icream> ic_iter = icreams.iterator();
+		while(ic_iter.hasNext()){
+			Icream ic = ic_iter.next();
+			ic.proceed();
+			
+			if(!ic.isAlive()){
+				gp.sprites.remove(ic);
+				ic_iter.remove();			
+			}
+		}
+		gp.updateGameUI(this);
+		
+		Rectangle2D.Double vr = v.getRectangle();
+		Rectangle2D.Double cr;
+		for(Icream ic : icreams){
+			cr = ic.getRectangle();
+			if(cr.intersects(vr)){	
+				score += 300;
+				ic.pickUp();
+			}
+		}
+	}
+
 	public void checkSpaceShip() {
 		if(!v.isAlive()) 
 			die();
 	}
 	
-	/*private void heartAlive(){
-		heart -= 1;
-		
-		if(heart <= 0)
-			die();
-			return;
-    }*/
+	
 	public void die(){
 		timer.stop();
 	}
@@ -224,8 +259,12 @@ public class GameEngine implements KeyListener, GameReporter{
 		this.scoreTotal = scoreTotal;
 	}
 
-	public int getSpaceShipHp() {
-		return v.getHp();
+	public int getSpaceShip() {
+		return v.getheart();
+	}
+
+	public int getHP() {
+		return v.gethp();
 	}
 
 	@Override

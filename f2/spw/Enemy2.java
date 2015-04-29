@@ -10,11 +10,11 @@ public class Enemy2 extends Sprite{
 	public static final int Y_TO_FADE = 400;
 	public static final int Y_TO_DIE = 600;
 	
-	private int step = 9;
+	private int step = 7;
 	private boolean alive = true;
 	
 	public Enemy2(int x, int y) {
-		super(x, y, 100, 100);
+		super(x, y, 20, 22);
 		
 	}
 
@@ -27,7 +27,7 @@ public class Enemy2 extends Sprite{
 					(float)(Y_TO_DIE - y)/(Y_TO_DIE - Y_TO_FADE)));
 		}
 		
-		    Image img = Toolkit.getDefaultToolkit().getImage("cat1.gif");
+		    Image img = Toolkit.getDefaultToolkit().getImage("heart.gif");
             g.drawImage(img, x, y, width, height, null);	
 		
 	}
