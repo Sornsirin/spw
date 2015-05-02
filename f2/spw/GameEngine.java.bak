@@ -11,6 +11,9 @@ import java.util.Iterator;
 import javax.swing.Timer;
 
 import javax.swing.JOptionPane;
+import javax.swing.JFrame;
+import java.awt.*;
+import javax.swing.*;
 
 
 public class GameEngine implements KeyListener, GameReporter{
@@ -32,10 +35,9 @@ public class GameEngine implements KeyListener, GameReporter{
 	private long scoreTotal = 0;
 	private long scoreItem = 0;
 	private long score = 0;
-	private long heart = 3;
-	//private long hp = 100;
-
-
+	private int countCake = 0;
+	private int countIcream = 0;
+	
 	private double difficulty = 0.1;
 	
 	public GameEngine(GamePanel gp, SpaceShip v) {
@@ -88,7 +90,7 @@ public class GameEngine implements KeyListener, GameReporter{
 	}	
 
 	private void process(){
-		if(Math.random() < difficulty){
+		if(Math.random() < difficulty/3){
 			generateEnemy();
 		}
 	
@@ -100,7 +102,6 @@ public class GameEngine implements KeyListener, GameReporter{
 			if(!e.isAlive()){
 				e_iter.remove();
 				gp.sprites.remove(e);
-				//score += 200;
 			}
 		}
 
@@ -131,7 +132,7 @@ public class GameEngine implements KeyListener, GameReporter{
 			if(!f.isAlive()){
 				f_iter.remove();
 				gp.sprites.remove(f);
-				//score += 300;
+				
 			}
 		}
 		gp.updateGameUI(this);
@@ -170,7 +171,8 @@ public class GameEngine implements KeyListener, GameReporter{
 		for(Item it : item){
 			tr = it.getRectangle();
 			if(tr.intersects(vr)){	
-				scoreItem += 500;
+				score += 500;
+				countCake++;
 				it.pickUp();
 			}
 		}
@@ -199,6 +201,7 @@ public class GameEngine implements KeyListener, GameReporter{
 			cr = ic.getRectangle();
 			if(cr.intersects(vr)){	
 				score += 300;
+				countIcream++;
 				ic.pickUp();
 			}
 		}
@@ -212,6 +215,9 @@ public class GameEngine implements KeyListener, GameReporter{
 	
 	public void die(){
 		timer.stop();
+		JFrame frame = new JFrame();
+		String name = JOptionPane.showInputDialog("Plase Input Your Name : ");
+		JOptionPane.showMessageDialog(frame,name +": Score : " + getScore() + getCountCake());
 	}
 	
 	void controlVehicle(KeyEvent e) {
@@ -234,29 +240,26 @@ public class GameEngine implements KeyListener, GameReporter{
 		}
 	}
 
+	public int getCountCake(){
+		return countCake;
+	}
+	public void setCountCake(int countCake){
+		this.countCake = countCake;
+	}
+
+	public int getCountIcream(){
+		return countIcream;
+	}
+	public void setCountIcream(int countIcream){
+		this.countIcream = countIcream;
+	}
+
 	public long getScore(){
 		return score;
 	}
 
 	public void setScore(long score){
 		this.score = score;
-	}
-
-	public long getScoreItem(){
-		return scoreItem;
-	}
-
-	public void setScoreItem(long scoreItem){
-		this.scoreItem = scoreItem;
-	}
-
-	public long getScoreTotal(){
-		scoreTotal = scoreItem + score;
-		return scoreTotal;
-	}
-
-	public void setScoreTotal(long scoreTotal){
-		this.scoreTotal = scoreTotal;
 	}
 
 	public int getSpaceShip() {

@@ -36,13 +36,13 @@ public class GamePanel extends JPanel {
 		big.setColor(Color.BLACK);		
 		big.drawString(String.format("Score:%08d", reporter.getScore()), 290, 20);
 		big.setColor(Color.BLACK);
-		big.drawString(String.format("Item:%08d", reporter.getScoreItem()), 115, 20);
+		big.drawString(String.format("ICREAM:%5d", reporter.getCountIcrean()), 110, 20);
 		big.setColor(Color.RED);
 		big.drawString(String.format("HP:%02d", reporter.getHP()), 60, 20);
 		big.setColor(Color.BLACK);
 		big.drawString(String.format("Alive:   %2d", reporter.getSpaceShip()), 3, 20);
 		big.setColor(Color.BLACK);
-		big.drawString(String.format("MAX:%08d", reporter.getScoreTotal()), 200, 20);
+		big.drawString(String.format("CAKE:%5d", reporter.getCountCake()), 200, 20);
 		for(Sprite s : sprites){
 			s.draw(big);
 		}
@@ -55,8 +55,5 @@ public class GamePanel extends JPanel {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawImage(bi, null, 0, 0);
 	}
-	/*public void paint(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g;
-		g.drawImage(bi, 0, 0, null);
-	}*/
+	
 }

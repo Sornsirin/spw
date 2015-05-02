@@ -3,8 +3,9 @@
 public interface GameReporter {
 
 	long getScore();
-	long getScoreItem();
-	long getScoreTotal();
 	int getSpaceShip();
 	int getHP();
+	int getCountCake();
+	int getCountIcream();
 }
+

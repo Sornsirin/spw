@@ -4,13 +4,54 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
+import java.awt.*;
+
+import javax.swing.*;
+
+import java.awt.event.*;
+
 public class Main {
 	public static void main(String[] args){
-		JFrame frame = new JFrame("Space War");
+		JFrame frame = new JFrame("POOHLAND");
+		JOptionPane.showMessageDialog(frame, "Welcome To POOHLAND");
+		
+
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(400, 650);
 		frame.getContentPane().setLayout(new BorderLayout());
-		
+
+		Font f = new Font("Courier New", Font.BOLD,15);
+
+        JMenuBar mb = new JMenuBar();
+
+       	JMenu start = new JMenu("Start");
+
+		JMenu pause = new JMenu("Pause");
+                
+        JMenu exit = new JMenu("Exit");
+
+		JMenuItem start2 = new JMenuItem("Start");
+
+		JMenuItem pause2 = new JMenuItem("Pause");
+
+        JMenuItem play = new JMenuItem("Play");
+
+        JMenuItem exit2 = new JMenuItem("Exit");
+                 
+        start.setFont(f);
+        pause.setFont(f);
+		exit.setFont(f);
+
+		start.add(start2);
+		exit.add(exit2);
+		pause.add(pause2);
+		pause.add(play);
+				
+		mb.add(start);
+		mb.add(pause);
+		mb.add(exit);
+		frame.setJMenuBar(mb);
+
 		SpaceShip v = new SpaceShip(180, 550, 20, 20);
 		GamePanel gp = new GamePanel();
 		GameEngine engine = new GameEngine(gp, v);
@@ -19,5 +60,6 @@ public class Main {
 		frame.setVisible(true);
 		
 		engine.start();
+		
 	}
 }
