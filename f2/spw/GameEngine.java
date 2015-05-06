@@ -211,6 +211,13 @@ public class GameEngine implements KeyListener, GameReporter{
 		if(!v.isAlive()) 
 			die();
 	}
+
+	public void restart(){
+		for(Enemy e : enemys){
+
+		}
+
+	}
 	
 	
 	public void die(){
@@ -219,7 +226,13 @@ public class GameEngine implements KeyListener, GameReporter{
 		String name = JOptionPane.showInputDialog("Plase Input Your Name : ");
 		JOptionPane.showMessageDialog(frame,name +": MAXSCORE : " + getScore());
 	}
-	
+	public void stop(){
+		timer.stop();	
+	}
+
+	//public String tostring(){
+	//		System.out.println("Score: "+ getScore() "Cake: "+getCountCake() "Icream: "+getCountIcream());
+	//}
 	void controlVehicle(KeyEvent e) {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_UP:

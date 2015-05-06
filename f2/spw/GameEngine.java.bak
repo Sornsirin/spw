@@ -217,9 +217,15 @@ public class GameEngine implements KeyListener, GameReporter{
 		timer.stop();
 		JFrame frame = new JFrame();
 		String name = JOptionPane.showInputDialog("Plase Input Your Name : ");
-		JOptionPane.showMessageDialog(frame,name +": Score : " + getScore() + getCountCake());
+		JOptionPane.showMessageDialog(frame,name +": MAXSCORE : " + getScore());
 	}
-	
+	public void stop(){
+		timer.stop();	
+	}
+
+	//public String tostring(){
+	//		System.out.println("Score: "+ getScore() "Cake: "+getCountCake() "Icream: "+getCountIcream());
+	//}
 	void controlVehicle(KeyEvent e) {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_UP:

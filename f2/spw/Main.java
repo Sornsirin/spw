@@ -30,31 +30,40 @@ public class Main {
                 
         JMenu exit = new JMenu("Exit");
 
-		JMenuItem start2 = new JMenuItem("Start");
+		JMenuItem restart = new JMenuItem("Restart");
 
 		JMenuItem pause2 = new JMenuItem("Pause");
 
         JMenuItem play = new JMenuItem("Play");
 
-        JMenuItem exit2 = new JMenuItem("Exit");
+        JMenuItem exit2 = new JMenuItem("Close");
                  
         start.setFont(f);
         pause.setFont(f);
 		exit.setFont(f);
 
-		start.add(start2);
+		start.add(restart);
 		exit.add(exit2);
-		pause.add(pause2);
+		pause.add(pause2); 
 		pause.add(play);
 				
 		mb.add(start);
 		mb.add(pause);
 		mb.add(exit);
 		frame.setJMenuBar(mb);
-
+		
 		SpaceShip v = new SpaceShip(180, 550, 20, 20);
 		GamePanel gp = new GamePanel();
 		GameEngine engine = new GameEngine(gp, v);
+
+		MenuListener menuListener = new MenuListener(exit2,restart,play,pause2,engine);
+        exit2.addActionListener(menuListener);
+		restart.addActionListener(menuListener);
+		play.addActionListener(menuListener);
+		pause2.addActionListener(menuListener);
+		
+
+		
 		frame.addKeyListener(engine);
 		frame.getContentPane().add(gp, BorderLayout.CENTER);
 		frame.setVisible(true);
