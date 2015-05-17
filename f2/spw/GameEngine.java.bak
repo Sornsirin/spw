@@ -37,28 +37,36 @@ public class GameEngine implements KeyListener, GameReporter{
 	private long score = 0;
 	private int countCake = 0;
 	private int countIcream = 0;
-	
+	private boolean check = true;
 	private double difficulty = 0.1;
+	private int hp = 100;
+	private int heart = 3;
 	
 	public GameEngine(GamePanel gp, SpaceShip v) {
 		this.gp = gp;
 		this.v = v;		
 		
 		gp.sprites.add(v);
-		
+		//gp.startUI(this);
+
 		timer = new Timer(50, new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				process();
-				process2();
-				processItem();
-				processIcream();
-				checkSpaceShip();
+				if(check)
+					process();
+				if(check)
+					process2();
+				if(check)
+					processItem();
+				if(check)
+					processIcream();
+				//if(check)
+					//checkSpaceShip();
 			}
 		});
 		timer.setRepeats(true);
-		
+		//gp.startUI(this);
 	}
 	
 	public void start(){
@@ -112,7 +120,9 @@ public class GameEngine implements KeyListener, GameReporter{
 		for(Enemy e : enemies){
 			er = e.getRectangle();
 			if(er.intersects(vr)){
-				v.hp();
+				hp();
+				//hit();
+				//v.hp();
 				e.hit();
 				return;
 			}
@@ -142,7 +152,9 @@ public class GameEngine implements KeyListener, GameReporter{
 		for(Enemy2 f : enemies2){
 			fr = f.getRectangle();
 			if(fr.intersects(vr)){
-				v.hp();
+				hp();
+				//hit();
+				//v.hp();
 				f.hit();
 				return;
 			}
@@ -207,25 +219,73 @@ public class GameEngine implements KeyListener, GameReporter{
 		}
 	}
 
-	public void checkSpaceShip() {
+	/*public void checkSpaceShip() {
 		if(!v.isAlive()) 
 			die();
+	}*/
+	public void hp(){
+		if(hp > 25)
+			hp -= 25;
+		else 
+			hit();		
+	}
+
+	public void hit() {
+		hp = 100;
+		heart--;
+		if(heart < 0 ) {
+			hp = 0;
+			//v.pickUp();
+			die();
+		}		
+	}
+	public void restart(){
+		for(Enemy e : enemies){
+			gp.sprites.remove(e);
+			e.hit();
+		}
+		for(Enemy2 f : enemies2){
+			gp.sprites.remove(f);
+			f.hit();
+		}
+		for(Item it : item){
+			gp.sprites.remove(it);
+			it.pickUp();
+		}
+		for(Icream ic : icreams){
+			gp.sprites.remove(ic);
+			ic.pickUp();
+		}
+		//checkSpaceShip();
+		//v.isAlive();
+		start();
+		check = true;
+		
+		score = 0;
+		countCake = 0;
+		countIcream = 0;
+		hp = 100;
+		heart = 3;
+		
+		v.x = 180;
+		v.y = 550;
+		
 	}
 	
 	
 	public void die(){
 		timer.stop();
+		check = false;
 		JFrame frame = new JFrame();
-		String name = JOptionPane.showInputDialog("Plase Input Your Name : ");
-		JOptionPane.showMessageDialog(frame,name +": MAXSCORE : " + getScore());
+		//String name = JOptionPane.showInputDialog("Plase Input Your Name : ");
+		//JOptionPane.showMessageDialog(frame,name +": MAXSCORE : " + getScore());
+		JOptionPane.showMessageDialog(frame, "MAXSCORE : " + getScore());
 	}
 	public void stop(){
 		timer.stop();	
 	}
 
-	//public String tostring(){
-	//		System.out.println("Score: "+ getScore() "Cake: "+getCountCake() "Icream: "+getCountIcream());
-	//}
+	
 	void controlVehicle(KeyEvent e) {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_UP:
@@ -243,8 +303,26 @@ public class GameEngine implements KeyListener, GameReporter{
 		case KeyEvent.VK_D:
 			difficulty += 0.1;
 			break;
+		case KeyEvent.VK_R:
+			restart();
+			break;
 		}
 	}
+
+	public int getheart() {
+		return heart;
+	}
+
+	public int gethp() {
+		return hp;
+	}
+	public void setheart(int heart) {
+		this.heart = heart;
+	}
+
+	/*public void sethp(int hp) {
+		this.hp = hp;
+	}*/
 
 	public int getCountCake(){
 		return countCake;
@@ -268,13 +346,13 @@ public class GameEngine implements KeyListener, GameReporter{
 		this.score = score;
 	}
 
-	public int getSpaceShip() {
+	/*public int getSpaceShip() {
 		return v.getheart();
 	}
 
 	public int getHP() {
 		return v.gethp();
-	}
+	}*/
 
 	@Override
 	public void keyPressed(KeyEvent e) {

@@ -30,8 +30,10 @@ public class MenuListener implements ActionListener{
             System.exit(0);
         }
        if(e.getSource() == restart){	    
-		    engine.die();
-			System.exit(0);
+		     engine.restart();
+			 
+			//engine.die();
+			//System.exit(0);
         }
 		if(e.getSource() == play){
            engine.start();
@@ -40,7 +42,7 @@ public class MenuListener implements ActionListener{
         if(e.getSource() == pause){
             engine.stop();
 			JFrame frame = new JFrame();
-			JOptionPane.showMessageDialog(frame, "SCORE : " + engine.getScore(),"Cake: "+engine.getCountCake());
+			JOptionPane.showMessageDialog(frame, "SCORE : " + engine.getScore());
         }
     }
 }

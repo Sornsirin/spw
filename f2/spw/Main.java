@@ -20,7 +20,6 @@ public class Main {
 		frame.setSize(400, 650);
 		frame.getContentPane().setLayout(new BorderLayout());
 
-		Font f = new Font("Courier New", Font.BOLD,15);
 
         JMenuBar mb = new JMenuBar();
 
@@ -38,10 +37,6 @@ public class Main {
 
         JMenuItem exit2 = new JMenuItem("Close");
                  
-        start.setFont(f);
-        pause.setFont(f);
-		exit.setFont(f);
-
 		start.add(restart);
 		exit.add(exit2);
 		pause.add(pause2); 
@@ -61,8 +56,6 @@ public class Main {
 		restart.addActionListener(menuListener);
 		play.addActionListener(menuListener);
 		pause2.addActionListener(menuListener);
-		
-
 		
 		frame.addKeyListener(engine);
 		frame.getContentPane().add(gp, BorderLayout.CENTER);

@@ -30,8 +30,7 @@ public class MenuListener implements ActionListener{
             System.exit(0);
         }
        if(e.getSource() == restart){	    
-		    engine.die();
-			System.exit(0);
+		     engine.restart();
         }
 		if(e.getSource() == play){
            engine.start();

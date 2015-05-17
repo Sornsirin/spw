@@ -8,10 +8,10 @@ import java.awt.Image;
 
 
 public class SpaceShip extends Sprite{
-
-	int heart = 3;
+	//int hp = 100;
+	//int heart = 3;
 	int step = 10;
-	int hp = 100;
+	
 	boolean alive = true;
 	
 	public SpaceShip(int x, int y, int width, int height) {
@@ -41,7 +41,7 @@ public class SpaceShip extends Sprite{
 				y = 600	- height;
 		}	
 	}
-	public void hp(){
+	/*public void hp(){
 		if(hp > 25)
 			hp -= 25;
 		else 
@@ -63,8 +63,11 @@ public class SpaceShip extends Sprite{
 
 	public int gethp() {
 		return hp;
+	}*/
+	
+	public void pickUp() {
+		alive = false;
 	}
-
 	public boolean isAlive() {
 		return alive;
 	}

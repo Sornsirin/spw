@@ -38,9 +38,11 @@ public class GamePanel extends JPanel {
 		big.setColor(Color.BLACK);
 		big.drawString(String.format("ICREAM:%5d", reporter.getCountIcream()), 110, 20);
 		big.setColor(Color.RED);
-		big.drawString(String.format("HP:%02d", reporter.getHP()), 60, 20);
+		big.drawString(String.format("HP:%02d", reporter.gethp()), 60, 20);
 		big.setColor(Color.BLACK);
-		big.drawString(String.format("Alive:   %2d", reporter.getSpaceShip()), 3, 20);
+		//big.drawString(String.format("Alive:   %2d", reporter.getSpaceShip()), 3, 20);
+		big.drawString(String.format("Alive:   %2d", reporter.getheart()), 3, 20);
+
 		big.setColor(Color.BLACK);
 		big.drawString(String.format("CAKE:%5d", reporter.getCountCake()), 200, 20);
 		for(Sprite s : sprites){
